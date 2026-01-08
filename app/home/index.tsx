@@ -39,9 +39,10 @@ const Home = () => {
         />
 
         <MovieHorizontalList
-          movies={topRatedMoviesQuery.data ?? []}
+          movies={topRatedMoviesQuery.data?.pages.flat() ?? []}
           title="Más valoradas"
           clasName="mb-5"
+          loadNextPage={topRatedMoviesQuery.fetchNextPage}
         />
 
         <MovieHorizontalList
