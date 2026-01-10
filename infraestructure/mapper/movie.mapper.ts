@@ -1,3 +1,5 @@
+import { Cast } from "../interfaces/cast.interface";
+import { CastResponse } from "../interfaces/cast.response.interface";
 import { CompleteMovie, Movie } from "../interfaces/movie.interface";
 import { MoviesDBMovieResponse } from "../interfaces/moviedb-movie.response";
 import { Result } from "../interfaces/moviedb-response";
@@ -31,6 +33,20 @@ export class MovieMapper {
       duration: movie.runtime,
       originalTitle: movie.original_title,
       productionCompanies: movie.production_companies.map((c) => c.name),
+    };
+  };
+
+  static fromCastResponseToCast = (actor: CastResponse): Cast => {
+    return {
+      id: actor.id,
+      name: actor.name,
+      profilePath: actor.profile_path
+        ? `https://image.tmdb.org/t/p/w500${actor.profile_path}`
+        : "https://i.stack.imgur.com/l60Hf.png",
+      adult: actor.adult,
+      gender: actor.gender,
+      originalName: actor.original_name,
+      character: actor.character,
     };
   };
 }
